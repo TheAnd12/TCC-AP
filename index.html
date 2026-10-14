@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sistema moderno de reserva de salas"
+    >
+
+    <title>RoomFlow • Reserva de Salas</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                R
+            </div>
+
+            <div class="brand-text">
+                <strong>RoomFlow</strong>
+                <span>Gestão de salas</span>
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <button
+                class="nav-item active"
+                data-section="dashboard"
+            >
+                <span class="nav-icon">▦</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="agenda"
+            >
+                <span class="nav-icon">▤</span>
+                <span>Agenda</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="salas"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>Salas</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="reservas"
+            >
+                <span class="nav-icon">✓</span>
+                <span>Reservas</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>Sistema online</strong>
+                    <small>Dados salvos localmente</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                aria-label="Abrir menu"
+            >
+                ☰
+            </button>
+
+
+            <div class="page-heading">
+
+                <span class="eyebrow">
+                    GESTÃO
+                </span>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-button"
+                    id="themeToggle"
+                    title="Alternar tema"
+                >
+                    ☾
+                </button>
+
+                <button
+                    class="icon-button"
+                    id="exportButton"
+                    title="Exportar reservas"
+                >
+                    ↓
+                </button>
+
+                <button
+                    class="primary-button"
+                    id="newReservationButton"
+                >
+                    <span>+</span>
+                    Nova reserva
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            class="page-section active"
+            id="dashboard"
+        >
+
+            <div class="welcome">
+
+                <div>
+
+                    <span class="eyebrow">
+                        VISÃO GERAL
+                    </span>
+
+                    <h2>
+                        Controle suas salas
+                        <span class="gradient-text">com facilidade.</span>
+                    </h2>
+
+                    <p>
+                        Consulte a agenda, acompanhe a ocupação
+                        e faça novas reservas em poucos cliques.
+                    </p>
+
+                </div>
+
+                <div class="welcome-decoration">
+                    <div class="decoration-circle circle-one"></div>
+                    <div class="decoration-circle circle-two"></div>
+                    <div class="decoration-grid"></div>
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ◉
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Total de salas</span>
+
+                        <strong id="totalRooms">
+                            0
+                        </strong>
+
+                        <small>
+                            Salas cadastradas
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Salas livres hoje</span>
+
+                        <strong id="availableRooms">
+                            0
+                        </strong>
+
+                        <small>
+                            Disponibilidade atual
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ◷
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Reservas hoje</span>
+
+                        <strong id="todayReservations">
+                            0
+                        </strong>
+
+                        <small>
+                            Agendamentos
+                        </small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-icon orange">
+                        %
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Ocupação</span>
+
+                        <strong id="occupancy">
+                            0%
+                        </strong>
+
+                        <small>
+                            Hoje
+                        </small>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- DASHBOARD CONTENT -->
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="eyebrow">
+                                HOJE
+                            </span>
+
+                            <h3>Agenda do dia</h3>
+                        </div>
+
+                        <button
+                            class="text-button"
+                            data-go="agenda"
+                        >
+                            Ver agenda →
+                        </button>
+
+                    </div>
+
+                    <div id="todaySchedule"></div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <span class="eyebrow">
+                                PRÓXIMOS
+                            </span>
+
+                            <h3>Reservas recentes</h3>
+                        </div>
+
+                    </div>
+
+                    <div id="recentReservations"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AGENDA
+        ================================================== -->
+
+        <section
+            class="page-section"
+            id="agenda"
+        >
+
+            <div class="section-toolbar">
+
+                <div>
+
+                    <span class="eyebrow">
+                        CALENDÁRIO
+                    </span>
+
+                    <h2>Agenda de salas</h2>
+
+                </div>
+
+
+                <div class="toolbar-actions">
+
+                    <button
+                        class="secondary-button"
+                        id="previousDay"
+                    >
+                        ←
+                    </button>
+
+                    <button
+                        class="secondary-button today-button"
+                        id="todayButton"
+                    >
+                        Hoje
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        id="nextDay"
+                    >
+                        →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="date-display">
+
+                <strong id="agendaDate">
+                    Hoje
+                </strong>
+
+                <span id="agendaDateFull">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="agenda-wrapper">
+
+                <div class="agenda">
+
+                    <div class="agenda-corner">
+                        Horário
+                    </div>
+
+                    <div
+                        class="agenda-rooms"
+                        id="agendaRooms"
+                    >
+                    </div>
+
+                    <div
+                        class="time-column"
+                        id="timeColumn"
+                    >
+                    </div>
+
+                    <div
+                        class="agenda-grid"
+                        id="agendaGrid"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SALAS
+        ================================================== -->
+
+        <section
+            class="page-section"
+            id="salas"
+        >
+
+            <div class="section-toolbar">
+
+                <div>
+
+                    <span class="eyebrow">
+                        INFRAESTRUTURA
+                    </span>
+
+                    <h2>Salas disponíveis</h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="rooms-grid"
+                id="roomsGrid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESERVAS
+        ================================================== -->
+
+        <section
+            class="page-section"
+            id="reservas"
+        >
+
+            <div class="section-toolbar">
+
+                <div>
+
+                    <span class="eyebrow">
+                        HISTÓRICO
+                    </span>
+
+                    <h2>Todas as reservas</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="filters">
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Buscar por responsável, sala..."
+                    >
+
+                </div>
+
+
+                <select id="filterRoom">
+
+                    <option value="all">
+                        Todas as salas
+                    </option>
+
+                </select>
+
+
+                <select id="filterDate">
+
+                    <option value="all">
+                        Todas as datas
+                    </option>
+
+                    <option value="today">
+                        Hoje
+                    </option>
+
+                    <option value="future">
+                        Próximas
+                    </option>
+
+                    <option value="past">
+                        Passadas
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="reservations-table-wrapper">
+
+                <table class="reservations-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Sala</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Responsável</th>
+                            <th>Finalidade</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="reservationsTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MODAL RESERVA
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="reservationModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        NOVO AGENDAMENTO
+                    </span>
+
+                    <h2>Reservar uma sala</h2>
+
+                </div>
+
+                <button
+                    class="modal-close"
+                    id="closeModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="reservationForm">
+
+                <div class="form-grid">
+
+                    <div class="form-field full">
+
+                        <label for="room">
+                            Sala
+                        </label>
+
+                        <select
+                            id="room"
+                            required
+                        >
+                            <option value="">
+                                Selecione uma sala
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="date">
+                            Data
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="time">
+                            Horário
+                        </label>
+
+                        <select
+                            id="time"
+                            required
+                        >
+                            <option value="">
+                                Selecione
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field full">
+
+                        <label for="responsible">
+                            Responsável
+                        </label>
+
+                        <input
+                            type="text"
+                            id="responsible"
+                            placeholder="Nome completo"
+                            maxlength="80"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field full">
+
+                        <label for="purpose">
+                            Finalidade
+                        </label>
+
+                        <textarea
+                            id="purpose"
+                            placeholder="Ex.: Reunião, treinamento, aula..."
+                            maxlength="200"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="conflict-message"
+                    id="conflictMessage"
+                >
+                    <span>!</span>
+                    <div>
+                        <strong>Horário indisponível</strong>
+                        <p>
+                            Já existe uma reserva para esta sala
+                            neste horário.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelModal"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="submitReservation"
+                    >
+                        Confirmar reserva
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL DETALHES
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="detailsModal"
+    >
+
+        <div class="modal small-modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="eyebrow">
+                        RESERVA
+                    </span>
+
+                    <h2>Detalhes</h2>
+                </div>
+
+                <button
+                    class="modal-close"
+                    id="closeDetails"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div id="reservationDetails"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    ></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+
+html
